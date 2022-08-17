@@ -1,0 +1,2 @@
+def DEBUG():
+    return True

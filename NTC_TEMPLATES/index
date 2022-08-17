@@ -1,0 +1,4 @@
+Template, Hostname, Platform, Command
+
+# my file, any, cisco_ios platform, command
+cisco_ios_show_mac_address_vlan_new.textfsm,  .*, cisco_ios, sh[[ow]] mac add[[ress]] vl[[an]]
