@@ -22,6 +22,10 @@ from ntc_templates.parse import parse_output
 class CiscoDataHandler:
     def get_info(self, device):
         try:
+            output_path = os.path.join(os.getcwd(), "output")
+            if not os.path.isdir(output_path):
+                os.mkdir(output_path)
+
             if preproc.DEBUG():
                 # для продакта
                 with ConnectHandler(**device) as dev:
@@ -157,7 +161,7 @@ class CiscoDataHandler:
                     
                     # преобразовываем их
 
-                    return self.__handle_data(show_vlan_brief, show_interfaces, dev, hostname)
+                    return self.__handle_data(show_vlan_brief, show_interfaces, dev, hostname, output_path)
             else:
                 # для дебага
                 show_interfaces = pd.read_excel(os.getcwd() + '/output_sh_ifaces.xlsx', sheet_name='output')
@@ -412,11 +416,7 @@ class CiscoDataHandler:
             fill_type='solid'
         )
 
-        output_path = os.path.join(os.getcwd(), "output")
-        if os.path.isdir(output_path):
-            os.mkdir(output_path)
-
-        path = os.path.join(output_path, f'{args[3]}_output.xlsx')
+        path = os.path.join(args[4], f'{args[3]}_output.xlsx')
         
         wb.save(path)
         print(f'Работа завершена. Таблица находится в {path}')
