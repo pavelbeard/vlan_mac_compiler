@@ -15,5 +15,12 @@ dev_info = {
     'fast_cli': False
 }
 
-c = CiscoDataHandler()
-c.get_info(dev_info)
+if (
+        dev_info['username'] == '********' or
+        dev_info['password'] == '********' or
+        dev_info['secret'] == '********'
+):
+    print("Введи логин и пароль в конфиг устройства")
+else:
+    c = CiscoDataHandler()
+    c.get_info(dev_info)
