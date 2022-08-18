@@ -1,0 +1,39 @@
+Legend: * - primary entry
+        age - seconds since last seen
+        n/a - not available
+
+  vlan   mac address     type    learn     age              ports
+------+----------------+--------+-----+----------+--------------------------
+Standby Supervisor:
+*    5  0050.56af.616c   dynamic  Yes         80   Te2/4
+*    5  0021.28a6.5cb4   dynamic  Yes        105   Te2/4
+*    5  0050.56af.6169   dynamic  Yes         80   Te2/4
+*    5  0050.568a.0e4d   dynamic  Yes         80   Te2/4
+*    5  0050.56af.616a   dynamic  Yes          0   Te2/4
+*    5  90e2.badc.e571   dynamic  Yes          0   Te2/4
+*    5  90e2.badc.e570   dynamic  Yes        110   Te2/4
+*    5  70db.9882.4480   dynamic  Yes         10   Te2/4
+*    5  0050.56af.6175   dynamic  Yes          0   Te2/4
+*    5  0050.5699.4197   dynamic  Yes         40   Te2/4
+*    5  0050.56af.6173   dynamic  Yes          0   Te2/4
+*    5  0050.56ba.31f4   dynamic  Yes         20   Te2/4
+*    5  0050.56ba.57df   dynamic  Yes        230   Te2/4
+*    5  0050.56af.6184   dynamic  Yes         35   Te2/4
+*    5  0050.56af.5c2f   dynamic  Yes         80   Te2/4
+*    5  0050.56af.5c21   dynamic  Yes        225   Te2/4
+*    5  0050.568a.5361   dynamic  Yes          0   Te2/4
+*    5  0050.565f.56d7   dynamic  Yes          5   Te2/4
+*    5  0050.56ae.987d   dynamic  Yes          5   Te2/4
+*    5  0050.56ae.3855   dynamic  Yes         35   Te2/4
+*    5  0050.56ae.0306   dynamic  Yes         50   Te2/4
+*    5  0014.4feb.81c8   dynamic  Yes        265   Te2/4
+*    5  0014.4feb.81c6   dynamic  Yes         50   Te2/4
+*    5  0050.569b.5889   dynamic  Yes         20   Te2/4
+*    5  0050.56af.5c33   dynamic  Yes         80   Te2/4
+*    5  0000.5e00.0105   dynamic  Yes          0   Te2/4
+*    5  0050.56af.5c32   dynamic  Yes        250   Te2/4
+*    5  0050.56ae.6b56   dynamic  Yes         35   Te2/4
+*    5  0050.569b.1d4d   dynamic  Yes         35   Te2/4
+*    5  0050.56af.5c34   dynamic  Yes          0   Te2/4
+*    5  0050.56ba.0b1c   dynamic  Yes         90   Te2/4
+*    5  0021.28a6.5cb6   dynamic  Yes         40   Te2/4

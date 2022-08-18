@@ -1,0 +1,6 @@
+Value Vlan (\d+)
+Value Mac ((.{4}\.){2}(.{4}))
+Value Port (.{2,7})
+
+Start
+ ^((\s{1,3})|(.{7,10}?))${Vlan}\s+${Mac}(.{28}|.{16})${Port} -> Record
