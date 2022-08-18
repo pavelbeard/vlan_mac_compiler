@@ -1,5 +1,7 @@
 ﻿Add-Type -AssemblyName PresentationFramework
 
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+
 $python_path = $env:path
 $run = $PSScriptRoot + "\run.ps1"
 $pkgs = "$PSScriptRoot\packages"
