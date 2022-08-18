@@ -56,7 +56,6 @@ class CiscoDataHandler:
                                     if vrf == '':
                                         command += ''
                                     else:
-                                        print(vrf)
                                         command += f'-vrf {vrf} '
 
                                     # username
@@ -412,9 +411,12 @@ class CiscoDataHandler:
             end_color='44643f',
             fill_type='solid'
         )
-        
 
-        path = f'{os.getcwd()}/output/{args[3]}_output.xlsx'
+        output_path = os.path.join(os.getcwd(), "output")
+        if os.path.isdir(output_path):
+            os.mkdir(output_path)
+
+        path = os.path.join(output_path, f'{args[3]}_output.xlsx')
         
         wb.save(path)
         print(f'Работа завершена. Таблица находится в {path}')
