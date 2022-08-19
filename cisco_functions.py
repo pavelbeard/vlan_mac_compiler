@@ -447,7 +447,8 @@ class CiscoDataHandler:
         return True
 
     def __get_vrfs(self, dev):
-        output = dev.send_command('show vrf', use_textfsm=True)
+        file1 = dev.send_command('show vrf')
+        output = parse_output(command='show vrf', data=file1, platform='cisco_ios')
         df = pd.DataFrame(output)
         vrf_dict = dict()
 
