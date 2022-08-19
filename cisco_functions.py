@@ -7,6 +7,8 @@ import textfsm
 import pandas as pd
 import preproc
 import time
+import wmi
+import ctypes
 from netmiko import (
     ConnectHandler,
     NetmikoTimeoutException,
@@ -33,13 +35,14 @@ class CiscoDataHandler:
 
                     if os.name == 'nt':
                         os.system('cls')
-                    else:
+                    if os.name == 'posix':
                         os.system('clear')
                     
                     print('Начать работу скрипта на XL 192.168.254.28?\nY-да|N-зайти на другую железку')
                     start_script = input()
 
                     output = ''
+                    command = ''
                     match start_script:
                         case 'Y' | 'y':
                             print('Продолжаем...')
@@ -72,6 +75,7 @@ class CiscoDataHandler:
 
                                     # login
                                     dev.write_channel(command + '\n')
+                                    os.system(f'powershell $host.UI.RawUI.WindowTitle = \'{command}\'')
                                     time.sleep(3)
 
                                     output = dev.read_channel()
@@ -115,7 +119,8 @@ class CiscoDataHandler:
 
                                 case 3:
                                     # login ssh/telnet
-                                    dev.write_channel(input() + '\n')
+                                    command = input() + '\n'
+                                    dev.write_channel(command)
                                     time.sleep(3)
 
                                     output = dev.read_channel()
@@ -131,6 +136,20 @@ class CiscoDataHandler:
 
                                         output = dev.read_channel()
                                         print(output)
+
+                            # set title
+                            if os.name == 'nt':
+                                processes = wmi.WMI()
+                                for process in processes.Win32_Process():
+                                    match process.Name:
+                                        case "powershell.exe":
+                                            os.system(f'powershell $host.UI.RawUI.WindowTitle = \'{command}\'')
+                                            break
+                                        case "cmd.exe":
+                                            ctypes.windll.kernel32.SetConsoleTitleW(command)
+
+                            if os.name == 'posix':
+                                os.system(f'\033]0;{command}\a')
 
                             # pass
                             dev.write_channel(dev.password + '\n')
