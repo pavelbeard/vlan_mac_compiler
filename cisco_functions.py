@@ -33,6 +33,8 @@ class CiscoDataHandler:
                 with ConnectHandler(**device) as dev:
                     dev.enable()
 
+                    vrfs = self.__get_vrfs(dev)
+
                     if os.name == 'nt':
                         os.system('cls')
                     if os.name == 'posix':
@@ -58,9 +60,10 @@ class CiscoDataHandler:
 
                                     # vrf
                                     print('Укажи VRF. Если нет - нажми Enter')
-                                    vrf = input()
+                                    [print(f'{index}: {vrf}') for index, vrf in vrfs]
+                                    vrf = vrfs.get(int(input()))
                                     
-                                    if vrf == '':
+                                    if vrf == 0:
                                         command += ''
                                     else:
                                         command += f'-vrf {vrf} '
@@ -93,9 +96,11 @@ class CiscoDataHandler:
                                     command += f'{ip} '
 
                                     # vrf
-                                    print('Укажи VRF. Если нет - нажми Enter')
-                                    vrf = input()
-                                    if vrf == '':
+                                    print('Укажи VRF. Если нет - нажми 0')
+                                    [print(f'{index}: {vrf}') for index, vrf in vrfs]
+                                    vrf = vrfs.get(int(input()))
+
+                                    if vrf == 0:
                                         command += ''
                                     else:
                                         command += f'/vrf {vrf} '
@@ -441,4 +446,16 @@ class CiscoDataHandler:
         print(f'Работа завершена. Таблица находится в {path}')
         return True
 
-        
+    def __get_vrfs(self, dev):
+        output = dev.send_command('show vrf', use_textfsm=True)
+        df = pd.DataFrame(output)
+        vrf_dict = dict()
+
+        i = 1
+
+        for vrf in df['name']:
+            vrf_dict.update({i: vrf})
+            i += 1
+
+        return vrf_dict
+
