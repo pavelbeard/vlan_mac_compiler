@@ -3,7 +3,7 @@ import pip
 import difflib
 import pkg_resources
 
-#!__VENV_PYTHON__
+# !__VENV_PYTHON__
 
 __name__ = 'setup.py'
 
@@ -19,6 +19,7 @@ def main():
         if package.__contains__(".txt") or package.__contains__(".py"):
             continue
         pip.main(["install", "--no-index", "--find-links=.", package])
+
 
 if __name__ == 'setup.py':
     main()

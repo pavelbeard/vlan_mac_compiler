@@ -3,6 +3,8 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/venv" />
+      <excludeFolder url="file://$MODULE_DIR$/local-venv" />
+      <excludeFolder url="file://$MODULE_DIR$/output" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.10 (vlan_mac_compiler)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
