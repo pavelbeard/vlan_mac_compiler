@@ -1,11 +1,12 @@
-﻿Add-Type -AssemblyName PresentationFramework
+﻿Set-ExecutionPolicy -Scope CurrentUser Bypass
+Add-Type -AssemblyName PresentationFramework
 
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 
 $python_path = $env:path
 $run = $PSScriptRoot + "\run.ps1"
 $pkgs = "$PSScriptRoot\packages"
 $ShortcutPath = "C:\Users\$env:UserName\Desktop\vlan_mac_compiller.lnk"
+$local_env = "$PSScriptRoot\local-venv"
 
 function Create-Link {
     
@@ -15,10 +16,20 @@ function Create-Link {
     $shortcut.Save()
 }
 
+function Setup-Packages {
+    python.exe -m venv $local_env
+    Set-Location -Path "$local_env\Scripts"
+    & ".\activate"
+    Set-Location -Path $pkgs
+    Start-Process -FilePath "$local_env\Scripts\python.exe" -Args ".\setup.py"
+}
+
 if ($python_path -like "*Python*")
 {
-    cd -Path $pkgs
-    python.exe setup.py -Wait
+    if(-Not(Test-Path -Path $local_env))
+    {
+        Setup-Packages
+    }
 
     if (-Not (Test-Path -Path $ShortcutPath -PathType Leaf))
     {
