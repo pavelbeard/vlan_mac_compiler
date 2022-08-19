@@ -8,7 +8,7 @@ def execute():
     c.get_info(dev_info)
 
 
-os.environ["NTC_TEMPLATES_DIR"] = os.getcwd() + '\\NTC_TEMPLATES'
+# os.environ["NTC_TEMPLATES_DIR"] = os.getcwd() + '\\NTC_TEMPLATES'
 
 dev_info = {
     'device_type': 'cisco_ios',
