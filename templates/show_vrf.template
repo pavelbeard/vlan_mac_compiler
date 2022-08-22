@@ -1,0 +1,16 @@
+Value VRF (\S+)
+Value DEFAULT_RD ((\d+|\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}):\d+|<not set>)
+Value List PROTOCOLS (\S+)
+Value List INT (\S+)
+
+Start
+  ^\s+Name\s+Default RD\s+Protocols\s+Interfaces -> Start_record
+  # Capture time-stamp if vty line has command time-stamping turned on
+  ^Load\s+for\s+
+  ^Time\s+source\s+is
+
+Start_record
+  ^\s{2}\S+ -> Continue.Record
+  ^\s{60}\s+${INT}
+  ^\s+${VRF}\s+${DEFAULT_RD}\s+${PROTOCOLS}\s+${INT}
+  ^\s+${VRF}\s+${DEFAULT_RD}\s+${PROTOCOLS}_

@@ -3,6 +3,8 @@ import os
 import re
 import os
 import socket
+
+import pandas
 import textfsm
 import pandas as pd
 import preproc
@@ -447,16 +449,16 @@ class CiscoDataHandler:
         return True
 
     def __get_vrfs(self, dev):
-        file1 = dev.send_command('show vrf')
-        output = parse_output(command='show vrf', data=file1, platform='cisco_ios')
-        df = pd.DataFrame(output)
-        vrf_dict = dict()
+        with open('templates/show_vrf.template') as vrf_t:
+            fsm = textfsm.TextFSM(vrf_t)
+            output = fsm.ParseText(dev.send_command('show vrf'))
+            vrfs = pandas.DataFrame(output)[0].tolist()
+            vrf_dict = dict()
 
-        i = 1
+            i = 1
 
-        for vrf in df['name']:
-            vrf_dict.update({i: vrf})
-            i += 1
+            for vrf in vrfs:
+                vrf_dict.update({i: vrf})
+                i += 1
 
-        return vrf_dict
-
+            return vrf_dict

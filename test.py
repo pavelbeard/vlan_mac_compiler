@@ -7,17 +7,17 @@ import pandas
 from ntc_templates.parse import parse_output
 #
 #
-file1 = open(r'D:\PyCharmProjects\vlan_mac_compiler\files\show vrf.txt').read()
+file1 = r'D:\PyCharmProjects\vlan_mac_compiler\files\show vrf.txt'
 
-# os.environ["NTC_TEMPLATES_DIR"] = r'D:\PyCharmProjects\vlan_mac_compiler\NTC_TEMPLATES'
-output = parse_output(command='show vrf', data=file1, platform='cisco_ios')
-df = pandas.DataFrame(output)
-vrf_dict = dict()
-i = 1
-for vrf in df['name']:
-    vrf_dict.update({i: vrf})
-    print(vrf_dict.get(i))
-    i += 1
+with open('templates/show_vrf.template') as f:
+    fsm = textfsm.TextFSM(f)
+    output = fsm.ParseText(open('files/show vrf.txt').read())
+    df = pandas.DataFrame(output)
 
-# command = "23434"
-# ctypes.windll.kernel32.SetConsoleTitleW(command)
+    vrf_dict = {}
+    i = 1
+    for vrf in df[0].tolist():
+        vrf_dict.update({i: vrf})
+        i += 1
+
+    print(vrf_dict)
