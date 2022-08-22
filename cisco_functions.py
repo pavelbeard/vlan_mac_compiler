@@ -62,7 +62,7 @@ class CiscoDataHandler:
 
                                     # vrf
                                     print('Укажи VRF. Если нет - нажми Enter')
-                                    [print(f'{index}: {vrf}') for index, vrf in vrfs]
+                                    [print(f'{index}: {vrf}') for index, vrf in vrfs.items()]
                                     vrf = vrfs.get(int(input()))
                                     
                                     if vrf == 0:
@@ -99,7 +99,7 @@ class CiscoDataHandler:
 
                                     # vrf
                                     print('Укажи VRF. Если нет - нажми 0')
-                                    [print(f'{index}: {vrf}') for index, vrf in vrfs]
+                                    [print(f'{index}: {vrf}') for index, vrf in vrfs.items()]
                                     vrf = vrfs.get(int(input()))
 
                                     if vrf == 0:

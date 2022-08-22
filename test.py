@@ -38,6 +38,7 @@ def parse():
             vrf_dict.update({i: vrf})
             i += 1
 
-        print(vrf_dict)
+        for index, vrf in vrf_dict.items():
+            print(f'{index}||{vrf}')
 
 parse()
