@@ -4,7 +4,7 @@ Value List PROTOCOLS (\S+)
 Value List INT (\S+)
 
 Start
-  ^\s+Name\s+Default RD\s+Protocols\s+Interfaces -> Start_record
+  ^(\s+)?Name\s+Default RD\s+Protocols\s+Interfaces -> Start_record
   # Capture time-stamp if vty line has command time-stamping turned on
   ^Load\s+for\s+
   ^Time\s+source\s+is
