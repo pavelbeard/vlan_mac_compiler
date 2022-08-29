@@ -9,7 +9,6 @@ import textfsm
 import pandas as pd
 import preproc
 import time
-import wmi
 import ctypes
 from netmiko import (
     ConnectHandler,
@@ -146,6 +145,7 @@ class CiscoDataHandler:
 
                             # set title
                             if os.name == 'nt':
+                                import wmi
                                 processes = wmi.WMI()
                                 for process in processes.Win32_Process():
                                     match process.Name:
