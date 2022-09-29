@@ -155,8 +155,8 @@ class CiscoDataHandler:
                                         case "cmd.exe":
                                             ctypes.windll.kernel32.SetConsoleTitleW(command)
 
-                            if os.name == 'posix':
-                                os.system(f'\033]0;{command}\a')
+                            # if os.name == 'posix':
+                            #     os.system(f'\033]0;{command}\a')
 
                             # pass
                             dev.write_channel(dev.password + '\n')
@@ -449,7 +449,7 @@ class CiscoDataHandler:
         return True
 
     def __get_vrfs(self, dev):
-        with open('templates/show_vrf.template') as vrf_t:
+        with open(os.path.join(os.getcwd(), 'templates', 'show_vrf.template')) as vrf_t:
             fsm = textfsm.TextFSM(vrf_t)
             output = fsm.ParseText(dev.send_command('show vrf'))
             vrfs = pandas.DataFrame(output)[0].tolist()
