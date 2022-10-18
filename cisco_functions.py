@@ -34,13 +34,11 @@ class CiscoDataHandler:
                 with ConnectHandler(**device) as dev:
                     dev.enable()
 
-                    vrfs = self.__get_vrfs(dev)
-
                     if os.name == 'nt':
                         os.system('cls')
                     if os.name == 'posix':
                         os.system('clear')
-                    
+
                     print('Начать работу скрипта на XL 192.168.254.28?\nY-да|N-зайти на другую железку')
                     start_script = input()
 
@@ -51,6 +49,7 @@ class CiscoDataHandler:
                             print('Продолжаем...')
                         case 'N' | 'n':
                             print('1 - войти по ssh, 2 - telnet, 3 - самостоятельно пишем команду для подключения')
+                            vrfs = self.__get_vrfs(dev)
                             output = dev.find_prompt()
                             print(output)
                             ch = int(input())
