@@ -39,7 +39,7 @@ class CiscoDataHandler:
                     if os.name == 'posix':
                         os.system('clear')
 
-                    print('Начать работу скрипта на XL 192.168.254.28?\nY-да|N-зайти на другую железку')
+                    print(f'Начать работу скрипта на {device["host"]}? \nY-да|N-зайти на другую железку')
                     start_script = input()
 
                     output = ''
@@ -75,6 +75,13 @@ class CiscoDataHandler:
                                     print('Введи ip:')
                                     ip = input()
                                     command += f'{ip}'
+
+                                    # введи порт
+                                    print('Введи порт')
+                                    port = int(input())
+
+                                    if port == 0 or not port:
+                                        port = 22
 
                                     # login
                                     dev.write_channel(command + '\n')
@@ -154,8 +161,8 @@ class CiscoDataHandler:
                                         case "cmd.exe":
                                             ctypes.windll.kernel32.SetConsoleTitleW(command)
 
-                            # if os.name == 'posix':
-                            #     os.system(f'\033]0;{command}\a')
+                            if os.name == 'posix':
+                                os.system(f'\033]0;{command}\a')
 
                             # pass
                             dev.write_channel(dev.password + '\n')

@@ -21,15 +21,21 @@ def execute():
     ch = input()
     if ch == 'Y' or ch == 'y' or ch == 'ye' or ch == 'yes':
         print('Введи новый ip-адрес устройства:')
-
         address = input()
+
+        print('Введи порт:')
+        port = int(input())
+
+        if port !=0 or not port:
+            port = 22
 
         while not re.match('(\d+\.){3}\d+', address):
             print('Введеный хост не подходит паттерну: 0-255.0-255.0-255.0-255')
             address = input()
         else:
-            print(f'Назначен новый адрес хоста: {address}')
+            print(f'Назначен новый адрес хоста: {address}:{port}')
             dev_info['host'] = address
+            dev_info['port'] = port
 
     c.get_info(dev_info)
 
